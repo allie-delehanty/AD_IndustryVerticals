@@ -1,4 +1,5 @@
-import { Link, LinkField, Text, TextField, useSitecore } from '@sitecore-content-sdk/nextjs';
+import { SafeText } from '@/helpers/safeFieldText';
+import { Link, LinkField, TextField, useSitecore } from '@sitecore-content-sdk/nextjs';
 import React, { JSX } from 'react';
 import { ComponentProps } from 'lib/component-props';
 
@@ -55,10 +56,10 @@ export const Default = ({ params, fields }: TitleProps): JSX.Element => {
   return (
     <ComponentContent styles={styles} id={id}>
       {page.mode.isEditing ? (
-        <Text field={text} />
+        <SafeText field={text} tag="span" />
       ) : (
         <Link field={link}>
-          <Text field={text} />
+          <SafeText field={text} tag="span" />
         </Link>
       )}
     </ComponentContent>

@@ -7,10 +7,11 @@ import {
 } from '@sitecore-content-sdk/nextjs/codegen';
 // end of built-in imports
 
-import { Link, Text, useSitecore, RichText, NextImage, Placeholder, Image as Image_8a80e63291fea86e0744df19113dc44bec187216, CdpHelper, withDatasourceCheck, DateField } from '@sitecore-content-sdk/nextjs';
-import { useMemo, useRef, useState, useEffect, useId, useCallback } from 'react';
+import { SafeText } from '@/helpers/safeFieldText';
+import { Link, useSitecore, RichText, NextImage, Placeholder, Image as Image_8a80e63291fea86e0744df19113dc44bec187216, SitecoreProvider, CdpHelper, withDatasourceCheck, DateField } from '@sitecore-content-sdk/nextjs';
+import { useEffect, useMemo, useRef, useState, useId, useCallback } from 'react';
 import React from 'react';
-import Head from 'next/head';
+import { ASCRS_BRAND_CSS_VARS } from '@/constants/ascrsBrand';
 import { useI18n } from 'next-localization';
 import { faFacebookF, faInstagram, faLinkedin, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -30,8 +31,10 @@ import SearchResultsWidget from 'src/components/non-sitecore/search/SearchResult
 import { SEARCH_WIDGET_ID, HIGHLIGHTED_ARTICLES_RFKID, DEFAULT_IMG_URL, PREVIEW_WIDGET_ID, HOMEHIGHLIGHTED_WIDGET_ID } from '@/constants/search';
 import CarouselButton from 'src/components/non-sitecore/CarouselButton';
 import ReviewCard from 'src/components/non-sitecore/ReviewCard';
-import clsx from 'clsx';
+import { useIsMounted } from '@/hooks/useIsMounted';
+import AscrsPatternCircle from '@/assets/icons/ascrs-pattern-circle/AscrsPatternCircle';
 import { Quote } from '@/assets/icons/quote/Quote';
+import clsx from 'clsx';
 import { usePagination } from '@/hooks/usePagination';
 import { ProductCard } from '@/components/non-sitecore/ProductCard';
 import { Pagination as Pagination_25a2ac6977db7c44c4c657d8bc0b397259e5032a } from 'src/components/non-sitecore/Pagination';
@@ -82,7 +85,7 @@ import { getLinkContent, getLinkField, isNavLevel, isNavRootItem, prepareFields 
 import { useRouter as useRouter_0e8a928699f624a3ad05eb9c9906b0e7ce1a00be } from 'next/router';
 import { Select as Select_4a7098778d43a9b4dcd5871ec48ea51b5a246850, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'src/shadcn/components/ui/select';
 import { localeOptions } from '@/constants/localeOptions';
-import { generateIndexes } from '@/helpers/generateIndexes';
+import Head from 'next/head';
 import client from 'lib/sitecore-client';
 import * as FEAAS from '@sitecore-feaas/clientside/react';
 import nextConfig from 'next.config';
@@ -93,15 +96,21 @@ import { sortByDateDesc, getCategoryCounts } from '@/helpers/articleUtils';
 
 const importMap = [
   {
+    module: '@/helpers/safeFieldText',
+    exports: [
+      { name: 'SafeText', value: SafeText },
+    ]
+  },
+  {
     module: '@sitecore-content-sdk/nextjs',
     exports: [
       { name: 'Link', value: Link },
-      { name: 'Text', value: Text },
       { name: 'useSitecore', value: useSitecore },
       { name: 'RichText', value: RichText },
       { name: 'NextImage', value: NextImage },
       { name: 'Placeholder', value: Placeholder },
       { name: 'Image', value: Image_8a80e63291fea86e0744df19113dc44bec187216 },
+      { name: 'SitecoreProvider', value: SitecoreProvider },
       { name: 'CdpHelper', value: CdpHelper },
       { name: 'withDatasourceCheck', value: withDatasourceCheck },
       { name: 'DateField', value: DateField },
@@ -110,19 +119,19 @@ const importMap = [
   {
     module: 'react',
     exports: [
+      { name: 'useEffect', value: useEffect },
       { name: 'useMemo', value: useMemo },
       { name: 'useRef', value: useRef },
       { name: 'useState', value: useState },
-      { name: 'useEffect', value: useEffect },
       { name: 'useId', value: useId },
       { name: 'useCallback', value: useCallback },
       { name: 'default', value: React },
     ]
   },
   {
-    module: 'next/head',
+    module: '@/constants/ascrsBrand',
     exports: [
-      { name: 'default', value: Head },
+      { name: 'ASCRS_BRAND_CSS_VARS', value: ASCRS_BRAND_CSS_VARS },
     ]
   },
   {
@@ -278,15 +287,27 @@ const importMap = [
     ]
   },
   {
-    module: 'clsx',
+    module: '@/hooks/useIsMounted',
     exports: [
-      { name: 'default', value: clsx },
+      { name: 'useIsMounted', value: useIsMounted },
+    ]
+  },
+  {
+    module: '@/assets/icons/ascrs-pattern-circle/AscrsPatternCircle',
+    exports: [
+      { name: 'default', value: AscrsPatternCircle },
     ]
   },
   {
     module: '@/assets/icons/quote/Quote',
     exports: [
       { name: 'Quote', value: Quote },
+    ]
+  },
+  {
+    module: 'clsx',
+    exports: [
+      { name: 'default', value: clsx },
     ]
   },
   {
@@ -634,9 +655,9 @@ const importMap = [
     ]
   },
   {
-    module: '@/helpers/generateIndexes',
+    module: 'next/head',
     exports: [
-      { name: 'generateIndexes', value: generateIndexes },
+      { name: 'default', value: Head },
     ]
   },
   {

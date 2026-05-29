@@ -1,3 +1,4 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import { isParamEnabled } from '@/helpers/isParamEnabled';
 import { ComponentProps } from '@/lib/component-props';
 import {
@@ -5,7 +6,6 @@ import {
   ImageField,
   RichTextField,
   NextImage as ContentSdkImage,
-  Text as ContentSdkText,
   RichText as ContentSdkRichText,
   Placeholder,
   useSitecore,
@@ -81,11 +81,11 @@ export const Default = ({ params, fields, rendering }: ArticleDetailsProps) => {
 
             <div className="col-span-12 mt-8 lg:col-span-8 lg:col-start-3">
               <h2>
-                <ContentSdkText field={fields.Title} />
+                <SafeText field={fields.Title} tag="span" />
               </h2>
 
               <p className="text-foreground-muted mt-5 text-lg font-medium tracking-wide">
-                <ContentSdkText field={fields.ShortDescription} />
+                <SafeText field={fields.ShortDescription} tag="span" />
               </p>
 
               <div className="rich-text mt-10 text-lg">

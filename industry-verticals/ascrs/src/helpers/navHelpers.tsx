@@ -1,6 +1,7 @@
 import { NavigationProps, NavItemFields } from '@/components/navigation/Navigation';
 import React, { JSX } from 'react';
-import { LinkField, Text } from '@sitecore-content-sdk/nextjs';
+import { LinkField } from '@sitecore-content-sdk/nextjs';
+import { SafeText } from '@/helpers/safeFieldText';
 
 export const isNavLevel = (fields: NavItemFields, level: number): boolean => {
   return Array.isArray(fields.Styles) && fields.Styles.includes(`level${level}`);
@@ -24,7 +25,7 @@ export const getLinkContent = (fields: NavItemFields, logoSrc?: string): JSX.Ele
 
   const textField = fields.NavigationTitle || fields.Title;
   if (textField) {
-    return <Text field={textField} />;
+    return <SafeText field={textField} tag="span" />;
   }
 
   return fields.DisplayName;

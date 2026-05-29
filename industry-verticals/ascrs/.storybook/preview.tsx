@@ -6,6 +6,7 @@ import mockComponentMap from './mockData/mockComponentMap';
 import { I18nProvider } from 'next-localization';
 
 import '../src/assets/main.css';
+import { ascrsBrandCssText, ASCRS_FONT_LINK } from '../src/constants/ascrsBrand';
 
 const preview: Preview = {
   parameters: {
@@ -29,6 +30,8 @@ const preview: Preview = {
     (Story) => (
       <SitecoreProvider componentMap={mockComponentMap} page={mockPageData} api={mockApiData}>
         <I18nProvider locale="en" lngDict={{}}>
+          <link rel="stylesheet" href={ASCRS_FONT_LINK} />
+          <style>{`:root { ${ascrsBrandCssText} }`}</style>
           <Story />
         </I18nProvider>
       </SitecoreProvider>

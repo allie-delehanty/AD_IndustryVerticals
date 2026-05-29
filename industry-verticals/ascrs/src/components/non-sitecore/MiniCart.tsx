@@ -1,12 +1,8 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import { useEffect, useState } from 'react';
 import { useI18n } from 'next-localization';
 import { getCart, CartItem } from '@/lib/cart';
-import {
-  NextImage as ContentSdkImage,
-  Text as ContentSdkText,
-  Link,
-  LinkField,
-} from '@sitecore-content-sdk/nextjs';
+import { NextImage as ContentSdkImage, Link, LinkField } from '@sitecore-content-sdk/nextjs';
 import QuantityControl from './QuantityControl';
 import { useLocale } from '@/hooks/useLocaleOptions';
 import { Heart, X } from 'lucide-react';
@@ -89,7 +85,7 @@ export const MiniCart = ({
               </div>
               <div>
                 <h6 className="line-clamp-1 text-lg break-all">
-                  <ContentSdkText field={item.product.Title} />
+                  <SafeText field={item.product.Title} tag="span" />
                 </h6>
                 <p>
                   <span>{item.size?.fields.ProductSize.value}</span>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link as ContentSdkLink, Text, LinkField, TextField } from '@sitecore-content-sdk/nextjs';
+import { Link as ContentSdkLink, LinkField, TextField } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
+import { SafeText } from '@/helpers/safeFieldText';
 
 interface LinkListProps extends ComponentProps {
   fields: {
@@ -74,7 +75,9 @@ export const Default = ({ params, fields }: LinkListProps) => {
 
     return (
       <>
-        <Text tag="h3" field={datasource.field?.title} />
+        <h3>
+          <SafeText field={datasource.field?.title} tag="span" />
+        </h3>
         <ul>{links}</ul>
       </>
     );

@@ -11,17 +11,13 @@
   }
 }
 
-/* This doesn't really do what it says - we may need to rework it */
 .parallax-background {
   > .component-content {
     @apply bg-cover bg-fixed bg-position-[50%_0] bg-no-repeat max-md:bg-scroll;
   }
 }
 
-/* Background color  */
-/* &:not(.container) - full width container and other full width components - color from edge to edge */
-/* &.container > .component-content - centered container - color only the content to align with grid */
-
+/* Background color variants */
 .container-clean-background {
   &:not(.container),
   &.container > .component-content {
@@ -42,23 +38,54 @@
 
 .container-dark-background {
   > .component-content {
-    @apply border-accent;
+    @apply border-primary;
   }
 
   &:not(.container),
   &.container > .component-content {
-    @apply bg-accent border-accent text-background;
+    @apply bg-primary border-primary text-background;
 
     * {
       @apply text-inherit;
     }
 
-    .arrow-btn {
-      @apply border-b-background;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-background;
+    }
 
-      &::after {
-        @apply bg-background;
+    .arrow-btn,
+    .main-btn,
+    .cta-btn {
+      background-color: var(--ascrs-cta-orange);
+      border-color: var(--ascrs-cta-orange);
+      color: var(--color-background);
+
+      &:hover {
+        background-color: var(--color-background);
+        border-color: var(--ascrs-cta-orange);
+        color: var(--ascrs-cta-orange);
       }
+    }
+
+    .cta-btn--blue {
+      background-color: var(--ascrs-cta-navy);
+      border-color: var(--ascrs-cta-navy);
+      color: var(--color-background);
+
+      &:hover {
+        background-color: var(--color-background);
+        border-color: var(--ascrs-cta-navy);
+        color: var(--ascrs-cta-navy);
+      }
+    }
+
+    .action-btn {
+      @apply border-background text-background hover:bg-background hover:text-primary;
     }
   }
 }
@@ -74,18 +101,24 @@
   }
 }
 
+.container-promo-background {
+  &:not(.container),
+  &.container > .component-content {
+    @apply bg-background-promo;
+  }
+}
+
 /* Spacing */
-/* Using padding for the sides so it doesn't break the grid widths */
 .indent {
-  @apply px-12;
+  @apply px-6 md:px-12;
 }
 
 .indent-top {
-  @apply mt-6;
+  @apply mt-8 md:mt-12;
 }
 
 .indent-bottom {
-  @apply mb-6;
+  @apply mb-8 md:mb-12;
 }
 
 /* Content alignment */
@@ -117,11 +150,11 @@
 }
 
 .container-dark-background .shim {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 51, 102, 0.85);
   padding: 50px;
 }
 
 .shim {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.92);
   padding: 50px;
 }

@@ -3,7 +3,7 @@
  */
 import React, { JSX } from 'react';
 import Head from 'next/head';
-import { Placeholder, Field, Page, ImageField } from '@sitecore-content-sdk/nextjs';
+import { Placeholder, Field, Page, ImageField, useSitecore } from '@sitecore-content-sdk/nextjs';
 import Scripts from 'src/Scripts';
 import SitecoreStyles from 'src/components/content-sdk/SitecoreStyles';
 import { DesignLibraryLayout } from './DesignLibraryLayout';
@@ -25,7 +25,9 @@ interface RouteFields {
 
 const Layout = ({ page }: LayoutProps): JSX.Element => {
   const router = useRouter();
-  const { layout, mode } = page;
+  const { page: sitecorePage } = useSitecore();
+  const { layout } = page;
+  const { mode } = sitecorePage;
   const { route } = layout.sitecore;
   const fields = route?.fields as RouteFields;
   const mainClassPageEditing = mode.isEditing ? 'editing-mode' : 'prod-mode';

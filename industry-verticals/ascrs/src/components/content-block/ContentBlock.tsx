@@ -1,5 +1,6 @@
-import { Text, RichText, Field, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
+import { RichText, Field, withDatasourceCheck } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
+import { SafeText } from '@/helpers/safeFieldText';
 import { JSX } from 'react';
 
 type ContentBlockProps = ComponentProps & {
@@ -16,7 +17,9 @@ type ContentBlockProps = ComponentProps & {
  */
 const ContentBlock = ({ fields }: ContentBlockProps): JSX.Element => (
   <div className="contentBlock">
-    <Text tag="h2" className="contentTitle" field={fields.heading} />
+    <h2 className="contentTitle">
+      <SafeText field={fields.heading} tag="span" />
+    </h2>
 
     <RichText className="contentDescription" field={fields.content} />
   </div>

@@ -38,7 +38,7 @@ export const Pagination = ({
       {currentPage > 1 && (
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          className={`${paginationButtonClasses} bg-background-accent`}
+          className={`${paginationButtonClasses} hover:bg-accent hover:text-background bg-background-accent transition-colors`}
         >
           <span className="md:hidden">
             <ChevronLeft size={16} />
@@ -90,7 +90,7 @@ export const Pagination = ({
       {currentPage < totalPages && (
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          className={`${paginationButtonClasses} bg-background-accent`}
+          className={`${paginationButtonClasses} hover:bg-accent hover:text-background bg-background-accent transition-colors`}
         >
           <span className="md:hidden">
             <ChevronRight size={16} />

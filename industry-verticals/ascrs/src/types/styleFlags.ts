@@ -12,6 +12,8 @@ export enum PromoFlags {
   HidePromoShapes = 'hide-promo-shapes',
   HidePromoShadows = 'hide-promo-shadows',
   HidePromoQuotes = 'hide-promo-quotes',
+  /** Promo CTA uses navy blue instead of default orange */
+  BlueButton = 'promo-blue-button',
 }
 
 export enum HeroBannerStyles {

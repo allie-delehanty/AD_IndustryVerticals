@@ -4,11 +4,12 @@ import {
   NextImage as ContentSdkImage,
   Link as ContentSdkLink,
   LinkField,
-  Text,
   useSitecore,
 } from '@sitecore-content-sdk/nextjs';
 import React from 'react';
 import { ComponentProps } from 'lib/component-props';
+import { SafeText } from '@/helpers/safeFieldText';
+import { useIsMounted } from '@/hooks/useIsMounted';
 
 interface ImageFields {
   Image: ImageField;
@@ -38,6 +39,7 @@ const ImageDefault: React.FC<ImageProps> = ({ params }) => (
 
 export const Default: React.FC<ImageProps> = (props) => {
   const { page } = useSitecore();
+  const isMounted = useIsMounted();
   const { fields, params } = props;
   const { styles, RenderingIdentifier: id } = params;
 
@@ -46,7 +48,8 @@ export const Default: React.FC<ImageProps> = (props) => {
   }
 
   const Image = () => <ContentSdkImage field={fields.Image} />;
-  const shouldWrapWithLink = !page.mode.isEditing && fields.TargetUrl?.value?.href;
+  const isEditing = isMounted && page.mode.isEditing;
+  const shouldWrapWithLink = !isEditing && fields.TargetUrl?.value?.href;
 
   return (
     <ImageWrapper className={`component image ${styles}`} id={id}>
@@ -57,7 +60,9 @@ export const Default: React.FC<ImageProps> = (props) => {
       ) : (
         <Image />
       )}
-      <Text tag="span" className="image-caption" field={fields.ImageCaption} />
+      <span className="image-caption">
+        <SafeText field={fields.ImageCaption} tag="span" />
+      </span>
     </ImageWrapper>
   );
 };

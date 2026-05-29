@@ -1,10 +1,6 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import React, { JSX, HTMLAttributes } from 'react';
-import {
-  NextImage as ContentSdkImage,
-  ImageField,
-  Text,
-  Field,
-} from '@sitecore-content-sdk/nextjs';
+import { NextImage as ContentSdkImage, ImageField, Field } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -66,10 +62,10 @@ export const Default = (props: PromoProps): JSX.Element => {
     <section className={`${props.params.styles} py-20 max-md:space-y-8`} id={id}>
       <div className="container space-y-4 text-center">
         <p className="eyebrow">
-          <Text field={Eyebrow} />
+          <SafeText field={Eyebrow} tag="span" />
         </p>
         <h2>
-          <Text field={Heading} />
+          <SafeText field={Heading} tag="span" />
         </h2>
       </div>
 

@@ -1,7 +1,7 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import {
   Field,
   ImageField,
-  Text,
   TextField,
   NextImage as ContentSdkImage,
 } from '@sitecore-content-sdk/nextjs';
@@ -22,11 +22,11 @@ type ReviewCardProps = SitecoreItem<{
 const ReviewCard = (props: ReviewCardProps) => {
   return (
     <>
-      <div className="aspect-square min-h-96 w-full rounded-2xl">
-        <ContentSdkImage className="image-cover rounded-2xl" field={props.fields.ReviewImage} />
+      <div className="aspect-square min-h-96 w-full rounded-lg">
+        <ContentSdkImage className="image-cover rounded-lg" field={props.fields.ReviewImage} />
       </div>
       <div className="px-5">
-        <div className="bg-background relative -top-15 flex min-h-70 flex-col items-center justify-between rounded-2xl p-8 text-center shadow-xl">
+        <div className="border-border bg-background relative -top-15 flex min-h-70 flex-col items-center justify-between rounded-lg border p-8 text-center shadow-lg">
           {/* Image */}
           <div className="bg-background absolute -top-10 flex h-[66px] w-[66px] items-center justify-center rounded-full">
             {props.fields.Avatar.value?.src || props.isPageEditing ? (
@@ -46,14 +46,14 @@ const ReviewCard = (props: ReviewCardProps) => {
           </div>
           <div className="!text-background-muted-light">
             <div className="text-center text-xl leading-normal font-bold capitalize">
-              <Text field={props.fields.ReviewerName} />
+              <SafeText field={props.fields.ReviewerName} tag="span" />
             </div>
             <div className="text-center text-sm leading-normal font-normal">
-              <Text field={props.fields.Caption} />
+              <SafeText field={props.fields.Caption} tag="span" />
             </div>
           </div>
           <div className="!text-background-muted-light text-center text-sm leading-5 font-normal">
-            <Text field={props.fields.Description} />
+            <SafeText field={props.fields.Description} tag="span" />
           </div>
           <StarRating rating={props.fields.Rating.value} />
         </div>

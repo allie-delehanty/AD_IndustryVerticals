@@ -1,11 +1,8 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import { useState } from 'react';
 import { useI18n } from 'next-localization';
 import { Product } from '@/types/products';
-import {
-  Text as ContentSdkText,
-  RichText as ContentSdkRichText,
-  ComponentRendering,
-} from '@sitecore-content-sdk/nextjs';
+import { RichText as ContentSdkRichText, ComponentRendering } from '@sitecore-content-sdk/nextjs';
 import { ProductReviews } from './ProductReviews';
 
 interface ProductTabsProps {
@@ -73,7 +70,7 @@ export const ProductTabs = ({ product, isPageEditing, rendering }: ProductTabsPr
                     <>
                       <dt>{t('width_label') || 'Width'}</dt>
                       <dd className="text-right">
-                        <ContentSdkText field={product.Width} />
+                        <SafeText field={product.Width} tag="span" />
                       </dd>
                     </>
                   )}
@@ -82,7 +79,7 @@ export const ProductTabs = ({ product, isPageEditing, rendering }: ProductTabsPr
                     <>
                       <dt>{t('height_label') || 'Height'}</dt>
                       <dd className="text-right">
-                        <ContentSdkText field={product.Height} />
+                        <SafeText field={product.Height} tag="span" />
                       </dd>
                     </>
                   )}
@@ -91,7 +88,7 @@ export const ProductTabs = ({ product, isPageEditing, rendering }: ProductTabsPr
                     <>
                       <dt>{t('depth_label') || 'Depth'}</dt>
                       <dd className="text-right">
-                        <ContentSdkText field={product.Depth} />
+                        <SafeText field={product.Depth} tag="span" />
                       </dd>
                     </>
                   )}
@@ -100,7 +97,7 @@ export const ProductTabs = ({ product, isPageEditing, rendering }: ProductTabsPr
                     <>
                       <dt>{t('weight_label') || 'Weight'}</dt>
                       <dd className="text-right">
-                        <ContentSdkText field={product.Weight} />
+                        <SafeText field={product.Weight} tag="span" />
                       </dd>
                     </>
                   )}
@@ -109,7 +106,7 @@ export const ProductTabs = ({ product, isPageEditing, rendering }: ProductTabsPr
                     <>
                       <dt>{t('seat_height_label') || 'Seat Height'}</dt>
                       <dd className="text-right">
-                        <ContentSdkText field={product.SeatHeight} />
+                        <SafeText field={product.SeatHeight} tag="span" />
                       </dd>
                     </>
                   )}
@@ -118,7 +115,7 @@ export const ProductTabs = ({ product, isPageEditing, rendering }: ProductTabsPr
                     <>
                       <dt>{t('leg_height_label') || 'Leg Height'}</dt>
                       <dd className="text-right">
-                        <ContentSdkText field={product.LegHeight} />
+                        <SafeText field={product.LegHeight} tag="span" />
                       </dd>
                     </>
                   )}

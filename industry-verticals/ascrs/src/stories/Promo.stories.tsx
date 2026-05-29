@@ -23,6 +23,7 @@ type StoryProps = PromoProps &
     HideShapes: boolean;
     HideShadows: boolean;
     HideQuote: boolean;
+    BlueButton: boolean;
   };
 
 const meta = {
@@ -57,6 +58,10 @@ const meta = {
       control: 'boolean',
       name: 'Hide Quote',
     },
+    BlueButton: {
+      control: 'boolean',
+      name: 'Blue CTA Button',
+    },
   },
   args: {
     ShowMultipleImages: false,
@@ -65,6 +70,7 @@ const meta = {
     HideShapes: false,
     HideShadows: false,
     HideQuote: false,
+    BlueButton: false,
     ...defaultBackgroundColorArgs,
   },
   tags: ['autodocs'],
@@ -105,7 +111,8 @@ export const Default: Story = {
       args.ShowMultipleImages && PromoFlags.ShowMultipleImages,
       args.HideShapes && PromoFlags.HidePromoShapes,
       args.HideShadows && PromoFlags.HidePromoShadows,
-      args.HideCurveLine && CommonStyles.HideAccentLine
+      args.HideCurveLine && CommonStyles.HideAccentLine,
+      args.BlueButton && PromoFlags.BlueButton
     );
 
     const params = {

@@ -1,4 +1,5 @@
-import { Text as ContentSdkText, useSitecore } from '@sitecore-content-sdk/nextjs';
+import { SafeText } from '@/helpers/safeFieldText';
+import { useSitecore } from '@sitecore-content-sdk/nextjs';
 import { useEffect, useState } from 'react';
 import SocialShare from '../non-sitecore/SocialShare';
 import { useI18n } from 'next-localization';
@@ -31,7 +32,7 @@ export const ProductMetaDetals = ({ product }: ProductMetaDetalsProps) => {
               <dt>{t('product_sku_label') || 'SKU'}</dt>
               <dd className="text-center">:</dd>
               <dd>
-                <ContentSdkText field={product.SKU} />
+                <SafeText field={product.SKU} tag="span" />
               </dd>
             </>
           )}

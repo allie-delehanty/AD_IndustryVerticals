@@ -1,5 +1,6 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import React from 'react';
-import { LinkField, Link as ContentSdkLink, Field, Text } from '@sitecore-content-sdk/nextjs';
+import { LinkField, Link as ContentSdkLink, Field } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 import {
   faFacebookF,
@@ -45,16 +46,22 @@ export const Default = (props: SocialFollowProps) => {
 
   return (
     <div className={`component social-follow ${props?.params?.styles}`} id={id}>
-      <h5 className="text-accent mb-5 text-lg">
-        <Text field={props.fields.SocialTitle} />
+      <h5 className="text-primary mb-5 text-sm font-bold tracking-wide uppercase">
+        <SafeText field={props.fields.SocialTitle} tag="span" />
       </h5>
       <div className="flex flex-col gap-y-4">
         {socialLinks.map(({ icon, field, key }) => (
           <div key={key} className="flex items-center gap-2">
             {field?.value?.href && (
               <>
-                <FontAwesomeIcon icon={icon} className="text-foreground text-xl" />
-                <ContentSdkLink field={field} className="text-foreground hover:underline" />
+                <FontAwesomeIcon
+                  icon={icon}
+                  className="text-primary group-hover:text-accent text-lg transition-colors"
+                />
+                <ContentSdkLink
+                  field={field}
+                  className="text-foreground-light hover:text-accent transition-colors"
+                />
               </>
             )}
           </div>
@@ -78,7 +85,7 @@ export const Horizontal = (props: SocialFollowProps) => {
   return (
     <div className={`component social-follow ${props?.params?.styles}`} id={id}>
       <h5 className="text-foreground mb-5 text-lg">
-        <Text field={props.fields.SocialTitle} />
+        <SafeText field={props.fields.SocialTitle} tag="span" />
       </h5>
 
       <div className="flex gap-2">

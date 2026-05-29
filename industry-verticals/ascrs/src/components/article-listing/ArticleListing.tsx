@@ -1,9 +1,9 @@
+import { SafeText } from '@/helpers/safeFieldText';
 import {
   Field,
   ImageField,
   RichTextField,
   NextImage as ContentSdkImage,
-  Text as ContentSdkText,
   DateField,
   Placeholder,
   useSitecore,
@@ -99,11 +99,9 @@ export const Default = (props: ArticleListingProps) => {
 
               {/* Content */}
               <div className="space-y-3">
-                <ContentSdkText
-                  field={article.fields?.Title}
-                  tag="h3"
-                  className="font-semibold transition-colors"
-                />
+                <h3 className="font-semibold transition-colors">
+                  <SafeText field={article.fields?.Title} tag="span" />
+                </h3>
 
                 {/* Icons */}
                 <div className="text-foreground-light flex items-center gap-10 text-xs sm:text-sm">
@@ -111,7 +109,7 @@ export const Default = (props: ArticleListingProps) => {
                   {(article.fields?.Author?.fields?.AuthorName?.value || isPageEditing) && (
                     <span className="flex items-center gap-2">
                       <FontAwesomeIcon icon={faUser as IconProp} />
-                      <ContentSdkText field={article.fields?.Author?.fields?.AuthorName} />
+                      <SafeText field={article.fields?.Author?.fields?.AuthorName} tag="span" />
                     </span>
                   )}
 
@@ -151,17 +149,15 @@ export const Default = (props: ArticleListingProps) => {
                   {(article.fields?.Category?.fields?.Category?.value || isPageEditing) && (
                     <span className="flex items-center gap-2">
                       <FontAwesomeIcon icon={faTag as IconProp} />
-                      <ContentSdkText field={article.fields?.Category?.fields?.Category} />
+                      <SafeText field={article.fields?.Category?.fields?.Category} tag="span" />
                     </span>
                   )}
                 </div>
 
                 {/* Short Description */}
-                <ContentSdkText
-                  field={article.fields?.ShortDescription}
-                  tag="p"
-                  className="line-clamp-5 text-justify text-lg"
-                />
+                <p className="line-clamp-5 text-justify text-lg">
+                  <SafeText field={article.fields?.ShortDescription} tag="span" />
+                </p>
 
                 {/* Read More Button */}
                 <Link href={article.url} className="arrow-btn" aria-label="Read full article">

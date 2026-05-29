@@ -1,4 +1,5 @@
-import { Text as ContentSdkText, useSitecore } from '@sitecore-content-sdk/nextjs';
+import { SafeText } from '@/helpers/safeFieldText';
+import { useSitecore } from '@sitecore-content-sdk/nextjs';
 import { Product } from '@/types/products';
 import StarRating from '../non-sitecore/StarRating';
 import { useLocale } from '@/hooks/useLocaleOptions';
@@ -20,12 +21,12 @@ export const ProductDescription = ({ product }: ProductDescriptionProps) => {
   return (
     <>
       <h1 className="pt-3 text-4xl font-bold lg:pt-0">
-        <ContentSdkText field={product.Title} />
+        <SafeText field={product.Title} tag="span" />
       </h1>
 
       {(product?.Price?.value || isPageEditing) && (
         <p className="text-xl">
-          {currency} <ContentSdkText field={product.Price} />
+          {currency} <SafeText field={product.Price} tag="span" />
         </p>
       )}
 
@@ -42,7 +43,7 @@ export const ProductDescription = ({ product }: ProductDescriptionProps) => {
 
       {(product?.ShortDescription?.value || isPageEditing) && (
         <p className="text-foreground text-lg">
-          <ContentSdkText field={product.ShortDescription} />
+          <SafeText field={product.ShortDescription} tag="span" />
         </p>
       )}
     </>

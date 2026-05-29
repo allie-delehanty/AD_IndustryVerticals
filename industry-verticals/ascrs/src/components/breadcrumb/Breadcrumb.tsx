@@ -76,7 +76,7 @@ export const Default = (props: BreadcrumbProps) => {
   return (
     <nav
       aria-label="breadcrumb"
-      className={`component breadcrumb bg-background-muted ${styles}`}
+      className={`component breadcrumb border-border bg-background-surface border-b ${styles}`}
       id={id}
     >
       <ol className="container flex items-center gap-4 overflow-auto py-4 lg:py-7">
@@ -133,7 +133,7 @@ export const Default = (props: BreadcrumbProps) => {
         )}
 
         <li
-          className="border-foreground border-l py-2 pl-4 whitespace-nowrap lg:ml-4 lg:pl-8"
+          className="border-accent text-primary border-l py-2 pl-4 font-semibold whitespace-nowrap lg:ml-4 lg:pl-8"
           title={getNavItemTitle(item, false)}
         >
           {getNavItemTitle(item)}

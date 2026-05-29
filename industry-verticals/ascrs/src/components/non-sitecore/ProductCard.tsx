@@ -1,4 +1,5 @@
-import { NextImage as ContentSdkImage, Text } from '@sitecore-content-sdk/nextjs';
+import { SafeText } from '@/helpers/safeFieldText';
+import { NextImage as ContentSdkImage } from '@sitecore-content-sdk/nextjs';
 import StarRating from './StarRating';
 import Link from 'next/link';
 import { Product } from '@/types/products';
@@ -25,7 +26,7 @@ export const ProductCard = ({ product, url, className }: ProductCardProps) => {
   return (
     <Link href={url} passHref>
       <div
-        className={`flex min-h-123 w-full flex-col overflow-hidden rounded-2xl hover:drop-shadow-sm ${className}`}
+        className={`border-border flex min-h-123 w-full flex-col overflow-hidden rounded-lg border transition-shadow hover:shadow-md ${className}`}
       >
         {/* Product Image */}
         <div className="bg-background-surface flex h-72 w-full items-center justify-center p-6">
@@ -39,11 +40,11 @@ export const ProductCard = ({ product, url, className }: ProductCardProps) => {
         {/* Product Details */}
         <div className="bg-background flex grow-1 flex-col items-start px-5 pt-3 pb-9 text-left">
           <p className="!text-foreground-light">
-            <Text field={product.Category?.fields?.CategoryName} />
+            <SafeText field={product.Category?.fields?.CategoryName} tag="span" />
           </p>
 
-          <h6 className="!text-foreground mt-1 line-clamp-2 font-semibold">
-            <Text field={product.Title} />
+          <h6 className="!text-primary mt-1 line-clamp-2 font-semibold">
+            <SafeText field={product.Title} tag="span" />
           </h6>
 
           <StarRating

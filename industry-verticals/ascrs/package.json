@@ -102,6 +102,7 @@
     "sitecore-tools:generate-map:watch": "sitecore-tools project component generate-map --watch",
     "sitecore-tools:build": "sitecore-tools project build",
     "dev": "cross-env NODE_ENV=development npm-run-all --serial sitecore-tools:build --parallel next:dev sitecore-tools:generate-map:watch",
+    "dev:clean": "rm -rf .next && npm run dev",
     "start": "cross-env-shell NODE_ENV=production npm-run-all --serial build next:start",
     "prepare": "git config core.hooksPath industry-verticals/retail/.husky || true",
     "storybook": "storybook dev -p 6006",

@@ -30,20 +30,77 @@
   @apply border-r;
 }
 
-.arrow-btn {
-  @apply border-b-accent text-accent inline-flex items-center justify-start gap-3 border-b leading-8;
+/* Shared CTA focus ring — WCAG visible focus */
+.cta-btn,
+.main-btn,
+.arrow-btn,
+.action-btn,
+.utility-btn {
+  @apply focus-visible:ring-accent focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none;
+}
 
-  &::after {
-    @apply bg-accent inline-block h-3 w-11 mask-[url('./images/arrow.svg')] bg-contain bg-no-repeat mask-contain mask-center mask-no-repeat content-[''];
+/* ASCRS pill CTA — solid fill default, white + colored text on hover (ascrs.org) */
+.main-btn,
+.cta-btn,
+.arrow-btn,
+a.main-btn,
+a.cta-btn,
+a.arrow-btn {
+  @apply inline-flex items-center justify-center rounded-full border-2 px-8 py-3.5 text-center text-sm font-bold tracking-wide uppercase transition-all;
+  background-color: var(--ascrs-cta-orange);
+  border-color: var(--ascrs-cta-orange);
+  color: var(--color-background);
+
+  &:hover {
+    background-color: var(--color-background);
+    border-color: var(--ascrs-cta-orange);
+    color: var(--ascrs-cta-orange);
+    @apply shadow-md;
+  }
+
+  &[disabled] {
+    @apply pointer-events-none opacity-60;
   }
 }
 
+/* Promo / section CTA — navy blue variant */
+.cta-btn--blue,
+a.cta-btn--blue {
+  background-color: var(--ascrs-cta-navy);
+  border-color: var(--ascrs-cta-navy);
+  color: var(--color-background);
+
+  &:hover {
+    background-color: var(--color-background);
+    border-color: var(--ascrs-cta-navy);
+    color: var(--ascrs-cta-navy);
+  }
+
+  &:focus-visible {
+    --tw-ring-color: var(--color-primary);
+  }
+}
+
+/* Secondary orange outline CTA — compare, wishlist, tertiary actions */
+.action-btn {
+  @apply border-accent text-accent hover:bg-accent inline-flex items-center gap-2 rounded-full border-2 bg-transparent px-6 py-2.5 text-sm font-bold tracking-wide uppercase transition-colors hover:text-white;
+}
+
+/* Teal utility buttons — Log in / Join (ascrs.org utility bar) */
+.utility-btn {
+  @apply bg-secondary text-background hover:bg-secondary-dark inline-flex items-center justify-center rounded-md px-5 py-2 text-xs font-bold tracking-wide uppercase transition-colors;
+}
+
+.utility-btn-outline {
+  @apply border-secondary text-secondary hover:bg-secondary inline-flex items-center justify-center rounded-md border-2 bg-transparent px-5 py-2 text-xs font-bold tracking-wide uppercase transition-colors hover:text-white;
+}
+
 .carousel-btn {
-  @apply text-foreground! bg-background z-10 size-12 content-center rounded-full shadow-md;
+  @apply text-primary! bg-background border-border hover:border-accent z-10 size-12 content-center rounded-full border shadow-sm transition-colors;
 }
 
 .surface-btn {
-  @apply bg-background-surface text-accent flex size-6 items-center justify-center rounded font-bold transition-shadow hover:shadow-md;
+  @apply bg-background-surface text-accent hover:bg-accent flex size-6 items-center justify-center rounded-full font-bold transition-colors hover:text-white;
 
   &[disabled] {
     @apply pointer-events-none opacity-60;
@@ -54,14 +111,105 @@
   }
 }
 
-.action-btn {
-  @apply text-accent hover:text-accent/80 hover:border-accent/80 border-accent flex h-10 items-center gap-3 border-b bg-transparent text-lg font-semibold;
+/* ASCRS circular image treatment */
+.ascrs-image-circle {
+  @apply relative aspect-square overflow-hidden rounded-full;
+
+  img {
+    @apply h-full w-full object-cover;
+  }
 }
 
-.main-btn {
-  @apply bg-accent text-background hover:bg-accent/95 flex w-full items-center justify-center rounded-md p-3 text-center text-lg font-semibold transition-all hover:shadow-md;
+.ascrs-decor-circle-orange {
+  @apply bg-accent pointer-events-none absolute -z-10 rounded-full;
+}
 
-  &[disabled] {
-    @apply pointer-events-none opacity-60;
+.ascrs-decor-circle-blue {
+  @apply bg-primary pointer-events-none absolute -z-10 rounded-full opacity-90;
+}
+
+/* ASCRS navy tools bar */
+.ascrs-tools-bar {
+  @apply bg-primary text-background w-full py-8 md:py-10;
+
+  h2,
+  h3,
+  h4 {
+    @apply text-background;
   }
+
+  a {
+    @apply text-background/90 hover:text-accent text-sm transition-colors;
+
+    &::before {
+      @apply text-accent mr-2 content-['→'];
+    }
+  }
+}
+
+/* ASCRS feature grid tiles */
+.ascrs-grid-tile {
+  @apply text-background flex min-h-48 flex-col items-center justify-center rounded-lg p-8 text-center transition-transform hover:scale-[1.02];
+
+  h3,
+  h4,
+  h5,
+  p {
+    @apply text-background;
+  }
+}
+
+.ascrs-grid-tile--accent {
+  @apply bg-accent;
+}
+
+.ascrs-grid-tile--primary {
+  @apply bg-primary;
+}
+
+/* Promo editorial section */
+.promo-section {
+  @apply bg-background-promo py-14 md:py-20;
+}
+
+.promo-rich-text {
+  @apply text-foreground-light text-base leading-relaxed md:text-[1.05rem];
+
+  p {
+    @apply text-foreground-light mb-4;
+  }
+
+  ul {
+    @apply mt-4 space-y-3 ps-0;
+
+    li {
+      @apply relative list-none ps-6;
+
+      &::before {
+        @apply bg-accent absolute top-[0.55em] left-0 size-2 rounded-full content-[''];
+      }
+    }
+  }
+
+  ol {
+    @apply mt-4 space-y-3 ps-6;
+  }
+}
+
+/* Circular promo image — orange ring */
+.promo-image-ring {
+  @apply border-accent relative z-10 size-64 overflow-hidden rounded-full border-[3px] md:size-80 lg:size-96;
+
+  img {
+    @apply h-full w-full object-cover;
+  }
+}
+
+.promo-pattern-accent {
+  @apply pointer-events-none absolute -right-4 -bottom-6 z-0 size-28 md:-right-6 md:-bottom-8 md:size-36 lg:size-40;
+}
+
+/* Orange section title accent */
+.section-title-accent {
+  @apply border-accent inline-block border-b-4 pb-2;
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import { SafeText } from '@/helpers/safeFieldText';
+
 import { ComponentProps } from '@/lib/component-props';
 import {
   Field,
@@ -8,7 +10,6 @@ import {
   RichTextField,
   NextImage as ContentSdkImage,
   RichText as ContentSdkRichText,
-  Text,
 } from '@sitecore-content-sdk/nextjs';
 import AccentLine from '@/assets/icons/accent-line/AccentLine';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
@@ -82,7 +83,7 @@ export const Default = (props: CarouselProps) => {
         >
           <div className="w-full space-y-5 md:w-1/3">
             <h2 className="inline-block max-w-md">
-              <Text field={props.fields.Title} />
+              <SafeText field={props.fields.Title} tag="span" />
               {!hideAccentLine && <AccentLine className="w-full max-w-xs" />}
             </h2>
 
@@ -137,15 +138,15 @@ export const Default = (props: CarouselProps) => {
                                       <div className="flex items-center gap-1 overflow-hidden text-xs font-extralight text-ellipsis whitespace-nowrap">
                                         <div className="h-[1px] w-7 bg-black"></div>
                                         <div className="text-foreground/75">
-                                          <Text
-                                            editable={false}
+                                          <SafeText
                                             field={article.fields?.Category?.fields?.Category}
+                                            tag="span"
                                           />
                                         </div>
                                       </div>
                                       <div>
                                         <h6 className="line-clamp-2 max-w-full overflow-hidden wrap-anywhere text-ellipsis">
-                                          <Text editable={false} field={article.fields?.Title} />
+                                          <SafeText field={article.fields?.Title} tag="span" />
                                         </h6>
                                       </div>
                                     </div>
