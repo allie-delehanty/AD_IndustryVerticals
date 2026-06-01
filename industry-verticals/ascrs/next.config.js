@@ -47,7 +47,13 @@ const nextConfig = {
         hostname: 'placehold.co',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'ze-dam.sitecoresandbox.cloud',
+        port: '',
+      },
     ],
+    unoptimized: true,
   },
 
   async rewrites() {
